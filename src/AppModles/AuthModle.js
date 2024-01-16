@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
+import bcrypt from "bcrypt";
 
 const schema = new mongoose.Schema({
     identity:{
         type:String,
-        required: true,
         default:"user"
     },
     email:{
@@ -21,6 +21,10 @@ const schema = new mongoose.Schema({
         required: true,
         unique:true
     }
+})
+
+schema.pre("save",async function(){
+    await bcrypt.hash(this.password,"mukundvaghasiya");
 })
 
 export const User = new mongoose.model("Auth",schema)
