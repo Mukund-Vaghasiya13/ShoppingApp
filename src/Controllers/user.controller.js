@@ -1,5 +1,6 @@
 import { asynchandler } from "../utility/AsyncHandler.js";
 import { User } from "../AppModles/AuthModle.js";
+import { ApiResponse } from "../utility/ApiResponse.js";
 
 const registerUser = asynchandler(async(req,res)=>{
     //Take value from user
@@ -23,10 +24,13 @@ const registerUser = asynchandler(async(req,res)=>{
     }
 
     // send response if Ok
+    res.status(201).json(
+        new ApiResponse({},"User Created Successfully",true)
+    )
 })
 
 const loginUser = asynchandler(async (req,res)=>{
-
+    
 })
 
 export {

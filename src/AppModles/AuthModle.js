@@ -24,7 +24,7 @@ const schema = new mongoose.Schema({
 })
 
 schema.pre("save",async function(){
-    await bcrypt.hash(this.password,"mukundvaghasiya");
+    await bcrypt.hash(this.password,10);
 })
 
 export const User = new mongoose.model("Auth",schema)
