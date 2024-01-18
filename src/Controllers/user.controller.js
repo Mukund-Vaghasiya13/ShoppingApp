@@ -51,8 +51,6 @@ const loginUser = asynchandler(async (req,res)=>{
         console.log("null")
     }
 
-    console.log(user)
-
     const valid = await user.MatchPasswordIsValid(password)
 
     if (!valid){
@@ -68,6 +66,31 @@ const loginUser = asynchandler(async (req,res)=>{
     
     res.status(200).cookie("AccessToken",token,option).json(
         new ApiResponse(token,"Login successfull",true)
+    )
+
+})
+
+
+const logout = asynchandler(async (req,res)=>{
+    const user = req.user
+
+    if (!user){
+        // Throw error 
+    }
+
+    const checking = await User.findById(user._id)
+
+    if(!checking){
+        // Throw error
+    }
+
+    const option = {
+        httpOnly: true,
+        secure: true
+    }
+
+    res.status(200).clearCookie("AccessToken",option).json(
+        new ApiResponse({},"Logout Out Successfull",true)
     )
 
 })
