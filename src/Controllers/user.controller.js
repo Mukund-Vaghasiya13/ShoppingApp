@@ -30,9 +30,49 @@ const registerUser = asynchandler(async(req,res)=>{
 })
 
 const loginUser = asynchandler(async (req,res)=>{
+    const {email,username,password} = req.body
+     
+    let user = null
+
+    if(email){
+         user = await User.findOne({
+            email
+        })
+    }else if(username){
+        user = await User.findOne({
+            username
+        })
+    }else{
+        // throw Api error
+    }
+   
+    if(!user){
+        // throw error
+        console.log("null")
+    }
+
+    console.log(user)
+
+    const valid = await user.MatchPasswordIsValid(password)
+
+    if (!valid){
+        // throw Error
+       
+    }   
+
+    const token = user.GenerateAccessToken(user)
+    const option = {
+        httpOnly: true,
+        secure: true
+    }
     
+    res.status(200).cookie("AccessToken",token,option).json(
+        new ApiResponse(token,"Login successfull",true)
+    )
+
 })
 
 export {
-    registerUser
+    registerUser,
+    loginUser
 }
