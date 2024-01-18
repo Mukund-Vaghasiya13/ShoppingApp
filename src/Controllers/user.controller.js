@@ -97,5 +97,6 @@ const logout = asynchandler(async (req,res)=>{
 
 export {
     registerUser,
-    loginUser
+    loginUser,
+    logout
 }
