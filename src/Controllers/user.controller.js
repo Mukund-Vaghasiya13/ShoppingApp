@@ -1,6 +1,7 @@
 import { asynchandler } from "../utility/AsyncHandler.js";
 import { User } from "../AppModles/AuthModle.js";
 import { ApiResponse } from "../utility/ApiResponse.js";
+import { ApiError } from "../utility/ApiError.js";
 
 const registerUser = asynchandler(async(req,res)=>{
     //Take value from user
@@ -9,6 +10,9 @@ const registerUser = asynchandler(async(req,res)=>{
     //validate user input
     if ([username,email,password].some((e)=> e == null)){
         //Throw Error
+        return res.status(400).json(
+            new ApiError("Invalid Details",false)
+        )
     }
 
     //if Ok ,Then create User
@@ -20,7 +24,9 @@ const registerUser = asynchandler(async(req,res)=>{
 
     // check User created or not
     if(!user){
-        // Throw error
+        return res.status(400).json(
+            new ApiError("Unable to create User",false)
+        )
     }
 
     // send response if Ok
@@ -35,7 +41,7 @@ const loginUser = asynchandler(async (req,res)=>{
     let user = null
 
     if(email){
-         user = await User.findOne({
+        user = await User.findOne({
             email
         })
     }else if(username){
@@ -43,19 +49,23 @@ const loginUser = asynchandler(async (req,res)=>{
             username
         })
     }else{
-        // throw Api error
+        return res.status(400).json(
+            new ApiError("Invalid Details",false)
+        )
     }
    
     if(!user){
-        // throw error
-        console.log("null")
+        return res.status(400).json(
+            new ApiError("Unable to create User",false)
+        )
     }
 
     const valid = await user.MatchPasswordIsValid(password)
 
     if (!valid){
-        // throw Error
-       
+        return res.status(400).json(
+            new ApiError("Invalid Password",false)
+        )
     }   
 
     const token = user.GenerateAccessToken(user)
@@ -70,33 +80,7 @@ const loginUser = asynchandler(async (req,res)=>{
 
 })
 
-
-const logout = asynchandler(async (req,res)=>{
-    const user = req.user
-
-    if (!user){
-        // Throw error 
-    }
-
-    const checking = await User.findById(user._id)
-
-    if(!checking){
-        // Throw error
-    }
-
-    const option = {
-        httpOnly: true,
-        secure: true
-    }
-
-    res.status(200).clearCookie("AccessToken",option).json(
-        new ApiResponse({},"Logout Out Successfull",true)
-    )
-
-})
-
 export {
     registerUser,
     loginUser,
-    logout
 }

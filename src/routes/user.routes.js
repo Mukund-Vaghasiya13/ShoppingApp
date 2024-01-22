@@ -1,6 +1,8 @@
-import { loginUser, logout, registerUser } from "../Controllers/user.controller.js";
+import { loginUser, registerUser } from "../Controllers/user.controller.js";
 import { Router } from "express";
 import { userAuthOrNot } from "../middleware/IsUSerAuthOrNot.js";
+import { CreateCatagory } from "../Controllers/Admin.controller.js";
+import { upload } from "../middleware/uplodeimage.js";
 
 const router = Router()
 
@@ -12,9 +14,11 @@ router.route("/login").post(
     loginUser
 )
 
-router.route("/logout").post(
-    userAuthOrNot,
-    logout
+// temp
+
+router.route("/uplode").post(
+    upload.single("catgory"),
+    CreateCatagory
 )
 
 export const UserRoute = router
