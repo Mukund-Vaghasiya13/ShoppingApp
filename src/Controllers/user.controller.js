@@ -56,7 +56,7 @@ const loginUser = asynchandler(async (req,res)=>{
    
     if(!user){
         return res.status(400).json(
-            new ApiError("Unable to create User",false)
+            new ApiError("User not found",false)
         )
     }
 
