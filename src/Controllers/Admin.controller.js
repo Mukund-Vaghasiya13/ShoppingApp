@@ -1,6 +1,5 @@
 import { ApiError } from "../utility/ApiError.js";
 import { ApiResponse } from "../utility/ApiResponse.js";
-import { User } from "../AppModles/AuthModle.js";
 import { Product } from "../AppModles/ProductModle.js";
 import { Catgory } from "../AppModles/CategoryModle.js";
 import { asynchandler } from "../utility/AsyncHandler.js";
@@ -37,7 +36,7 @@ const CreateCatagory = asynchandler(async (req,res)=>{
 
     //TODO: Send Response
     res.status(200).json(
-        new ApiResponse({},"Catagory Created Successfully",false)
+        new ApiResponse({},"Catagory Created Successfully",true)
     )
 })
 
@@ -56,7 +55,7 @@ const ProductUplodeInCatagory = asynchandler(async (req,res)=>{
     if(!FileOnCloud){
         // throw Error
         new ApiError("File Uplode On cloud error try again!",false)
-    }
+    } 
 
     const product = await Product.create({
         Productname:name,
