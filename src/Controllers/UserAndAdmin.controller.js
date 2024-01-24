@@ -37,5 +37,6 @@ const GetProductList = asynchandler(async (req,res)=>{
 })
 
 export {
-    GetListOfCatagorey
+    GetListOfCatagorey,
+    GetProductList
 }
