@@ -87,11 +87,11 @@ const deleteCatagory = asynchandler(async (req,res)=>{
         refId:catID
     })
 
-    if(DeleteProduct.deletedCount == 0){
-        return res.status(400).json(
-            new ApiError("Unable to delete product in catgory",false)
-        )
-    }
+    // if(DeleteProduct.deletedCount == 0){
+    //     return res.status(400).json(
+    //         new ApiError("Unable to delete product in catgory",false)
+    //     )
+    // }
 
     const deleteCatagory = await Catgory.findByIdAndDelete(catID)
 
@@ -117,11 +117,11 @@ const DeleteSingleProduct = asynchandler(async(req,res)=>{
         )
     }
 
-    const deleteProduct = await Catgory.findByIdAndDelete(ProId)
+    const deleteProduct = await Product.findByIdAndDelete(ProId)
 
     if(!deleteProduct){
         return res.status(400).json(
-            new ApiError("Not able to product",false)
+            new ApiError("Not able to delete product",false)
         )
     }
 
@@ -130,8 +130,13 @@ const DeleteSingleProduct = asynchandler(async(req,res)=>{
     )
 })
 
+const AddNewAdminUser = asynchandler(async (req,res)=>{
+    //TODO: Add Admin
+})
+
 export {
     CreateCatagory,
     ProductUplodeInCatagory,
     deleteCatagory,
+    DeleteSingleProduct
 }
