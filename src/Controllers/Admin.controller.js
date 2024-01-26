@@ -4,6 +4,7 @@ import { Product } from "../AppModles/ProductModle.js";
 import { Catgory } from "../AppModles/CategoryModle.js";
 import { asynchandler } from "../utility/AsyncHandler.js";
 import { uploadOnCloudinary } from "../middleware/Cloudnary.js";
+import { User } from "../AppModles/AuthModle.js";
 
 const CreateCatagory = asynchandler(async (req,res)=>{
     const filePath = req.file
@@ -102,7 +103,6 @@ const deleteCatagory = asynchandler(async (req,res)=>{
     }
 
 
-
     res.status(200).json(
         new ApiResponse({},"Catagory Deleted",true)
     )
@@ -131,7 +131,32 @@ const DeleteSingleProduct = asynchandler(async(req,res)=>{
 })
 
 const AddNewAdminUser = asynchandler(async (req,res)=>{
-    //TODO: Add Admin
+    const {email,username,password} = req.body
+
+    if ([username,email,password].some((e)=> e == null)){
+        //Throw Error
+        return res.status(400).json(
+            new ApiError("Invalid Details",false)
+        )
+    }
+
+    const user = await User.create({
+        username:username,
+        email:email,
+        password:password,
+        identity:"admin"
+    })
+
+    if(!user){
+        return res.status(400).json(
+            new ApiError("Unbale to create User",false)
+        )
+    }
+    
+    res.status(201).json(
+        new ApiResponse(user,"Usercreated",true)
+    )
+
 })
 
 export {
