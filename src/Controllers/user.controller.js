@@ -75,7 +75,7 @@ const loginUser = asynchandler(async (req,res)=>{
     }
     
     res.status(200).cookie("AccessToken",token,option).json(
-        new ApiResponse(token,"Login successfull",true)
+        new ApiResponse({token:token,identity:user.identity},"Login successfull",true)
     )
 
 })
