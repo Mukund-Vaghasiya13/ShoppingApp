@@ -8,10 +8,6 @@ import { User } from "../AppModles/AuthModle.js";
 import fs from "fs"
 
 
-const checkIsAdminOrNot = (user)=>{
-
-  
-}
 
 const CreateCatagory = asynchandler(async (req,res)=>{
     const filePath = req.file
