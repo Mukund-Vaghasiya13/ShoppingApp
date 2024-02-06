@@ -87,7 +87,7 @@ const ProductUplodeInCatagory = asynchandler(async (req,res)=>{
         new ApiError("Error in Creating Product",false)
     }
 
-    res.status(200).json(
+    res.status(201).json(
         new ApiResponse({},"Product Created Successfully",false)
     )
 })
