@@ -46,7 +46,7 @@ const CreateCatagory = asynchandler(async (req,res)=>{
     }
 
     //TODO: Send Response
-    res.status(200).json(
+    res.status(201).json(
         new ApiResponse({},"Catagory Created Successfully",true)
     )
 })
