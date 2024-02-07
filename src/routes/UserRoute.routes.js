@@ -10,7 +10,7 @@ router.route("/GetCatagory").get(
 )
 
 
-router.route("/GetProduct").get(
+router.route("/GetProduct/:id").get(
     userAuthOrNot,
     GetProductList
 )

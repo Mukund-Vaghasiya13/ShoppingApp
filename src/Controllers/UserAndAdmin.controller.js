@@ -21,7 +21,9 @@ const GetListOfCatagorey = asynchandler(async (req,res)=>{
 })
 
 const GetProductList = asynchandler(async (req,res)=>{
-    const GetListOfProduct = await Product.find({})
+    const {id} = req.params
+    console.log(id)
+    const GetListOfProduct = await Product.find({refId:id})
 
     if(!GetListOfProduct){
         // Throw Error 
