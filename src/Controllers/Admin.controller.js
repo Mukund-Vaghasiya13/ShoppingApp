@@ -88,7 +88,7 @@ const ProductUplodeInCatagory = asynchandler(async (req,res)=>{
     }
 
     res.status(201).json(
-        new ApiResponse({},"Product Created Successfully",false)
+        new ApiResponse({},"Product Created Successfully",true)
     )
 })
 
