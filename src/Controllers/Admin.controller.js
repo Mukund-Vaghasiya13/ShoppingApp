@@ -158,7 +158,7 @@ const DeleteSingleProduct = asynchandler(async(req,res)=>{
     }
 
     res.status(200).json(
-        new ApiResponse({},"Product Deleted successfully",false)
+        new ApiResponse({},"Product Deleted successfully",true)
     )
 })
 
