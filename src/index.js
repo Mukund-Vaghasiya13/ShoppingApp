@@ -1,5 +1,10 @@
 import { connectivity } from "./db/DbConnection.js";
 import { app } from "./app.js";
+import dotenv from "dotenv"
+
+dotenv.config({
+    path: './.env'
+})
 
 app.get("/helper",(req,res)=>{
     res.status(200).send("Live")

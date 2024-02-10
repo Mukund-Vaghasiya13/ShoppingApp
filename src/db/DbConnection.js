@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const connectivity = async ()=>{
     try{
-        await mongoose.connect("mongodb+srv://Mukund:8320017126@cluster0.vn1ihop.mongodb.net/",{
+        await mongoose.connect(process.env.MongoUrl,{
             dbName:"ShoppingApp"
         })
     }catch{
