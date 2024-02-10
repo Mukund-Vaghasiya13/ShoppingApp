@@ -11,7 +11,7 @@ app.get("/helper",(req,res)=>{
 })
 
 connectivity().then(()=>{
-    const port = process.env.PORT || 3000
+    const port = process.env.PORT
     app.listen(port,()=>{
         console.log(`✨ Live on http://localhost:${port}`)
     })
