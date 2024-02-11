@@ -3,8 +3,15 @@ import { UserRoute } from "./routes/user.routes.js"
 import cookieParser from "cookie-parser"
 import AdminRouter from "./routes/Admin.routes.js"
 import { UserAdmin } from "./routes/UserRoute.routes.js"
+import cors from "cors"
 
 const app = express()
+
+app.use(cors({
+    origin: "*",
+    credentials: true
+}))
+
 app.use(express.json())
 app.use(express.urlencoded())
 app.use(cookieParser())
