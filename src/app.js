@@ -8,7 +8,7 @@ import cors from "cors"
 const app = express()
 
 app.use(cors({
-    origin: "*",
+    origin: "https://react-shopping-app-xi.vercel.app",
     credentials: true
 }))
 
