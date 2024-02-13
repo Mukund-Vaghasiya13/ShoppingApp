@@ -32,7 +32,9 @@ const CreateCatagory = asynchandler(async (req,res)=>{
 
     if(!FileOnCloud){
         // throw Error
-        new ApiError("File Uplode On cloud error try again!",false)
+        return res.status(400).json(
+            new ApiError("File Uplode On cloud error try again!",false)
+        )
     }
 
     const catagory = await Catgory.create({
@@ -42,7 +44,9 @@ const CreateCatagory = asynchandler(async (req,res)=>{
 
     if(!catagory){
         // throw Error
-        new ApiError("Unable to create Category",false)
+        return res.status(400).json(
+            new ApiError("Unable to create Category",false)
+        )
     }
 
     //TODO: Send Response
@@ -72,8 +76,9 @@ const ProductUplodeInCatagory = asynchandler(async (req,res)=>{
     const FileOnCloud = await uploadOnCloudinary(filePath.path)
 
     if(!FileOnCloud){
-        // throw Error
-        new ApiError("File Uplode On cloud error try again!",false)
+        return res.status(400).json(
+         new ApiError("File Uplode On cloud error try again!",false)
+        )
     } 
 
     const product = await Product.create({
@@ -84,7 +89,9 @@ const ProductUplodeInCatagory = asynchandler(async (req,res)=>{
     })
 
     if(!product){
+        return res.status(400).json(
         new ApiError("Error in Creating Product",false)
+        )
     }
 
     res.status(201).json(
