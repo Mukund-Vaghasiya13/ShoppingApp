@@ -39,7 +39,7 @@ const CreateCatagory = asynchandler(async (req,res)=>{
 
     const catagory = await Catgory.create({
         name:name,
-        image:FileOnCloud.url
+        image:FileOnCloud.secure_url
     })
 
     if(!catagory){
